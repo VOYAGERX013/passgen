@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    1 [include css]
+        index.css
+    1 [terminate]
+    2 [include template]
+        navbar.html
+    2 [terminate]
+    <!-- <button type="button" class="btn btn-primary">Primary</button> -->
+    <div class="container">
+        <h1 class="heading">Home page</h1>
+        <div class="password-container">
+            <div class="input-group input-group-lg password-input" onclick="copyPassword()">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Password</span>
+                <input type="text" value="|password|" class="form-control" id="pass-gen" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <div class="progress" role="progressbar" aria-label="|color| example" aria-valuemin="0" aria-valuenow="|str(strength).strip()|" aria-valuemax="100">
+                <div class="progress-bar bg-|color.lower()|" style="width: |str(strength).strip()|%"></div>
+            </div>    
+        </div>
+        <form method="POST" action="/get-password">
+            <div class="conditions border rounded shadow-sm p-3 mb-5 bg-body-secondary rounded">
+                <h2>Conditions</h2>
+                <label for="customRange1" class="form-label characters">Characters: <span class="character-count">10</span></label>
+                <input type="range" onchange="showCharacters()" name="characters" class="form-range bg-body-secondary" id="customRange1" min="3" max="100" value="10">
+
+                <div class="inputs">
+                    <div class="form-check">
+                        <input class="form-check-input" name="hasUpper" type="checkbox" value="1" id="flexCheckChecked1" checked>
+                        <label class="form-check-label" for="flexCheckChecked1">Uppercase</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="hasLower" type="checkbox" value="1" id="flexCheckChecked2" checked>
+                        <label class="form-check-label" for="flexCheckChecked2">Lowercase</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="hasNumbers" type="checkbox" value="1" id="flexCheckChecked3" checked>
+                        <label class="form-check-label" for="flexCheckChecked3">Numbers</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="hasSpecial" type="checkbox" value="1" id="flexCheckChecked4">
+                        <label class="form-check-label" for="flexCheckChecked4">Special characters</label>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="submit-btn btn btn-primary" value="Generate" />
+        </form>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+        function showCharacters(){
+            characterCount = document.getElementsByClassName("character-count")[0]
+            characterCount.innerHTML = document.getElementsByClassName("form-range")[0].value
+        }
+
+        function copyPassword(){
+            passElem = document.getElementById("pass-gen")
+            passElem.select()
+            navigator.clipboard.writeText(passElem.value);
+        }
+    </script>
+</body>
+</html>
